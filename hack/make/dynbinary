@@ -8,7 +8,7 @@ echo "Created binary: $DEST/dockerinit-$VERSION"
 ln -sf dockerinit-$VERSION $DEST/dockerinit
 
 # sha1 our new dockerinit to ensure separate docker and dockerinit always run in a perfect pair compiled for one another
-export DOCKER_INITSHA1="$(sha1sum $DEST/dockerinit-$VERSION | cut -d' ' -f1)"
+export DOCKER_INITSHA1="$(openssl sha1 $DEST/dockerinit-$VERSION | sed 's|SHA1(.*)= \(.*\)|\1|')"
 # exported so that "dyntest" can easily access it later without recalculating it
 
 (
